@@ -1,4 +1,3 @@
-loaded.innerHTML = (new Date()).toLocaleTimeString();
 
 document.getElementById('btn-get').addEventListener('click', getData);
 
