@@ -1,15 +1,20 @@
 
-document.getElementById('btn-get').addEventListener('click', getData);
+document.querySelector("input[type=submit]").addEventListener("click", sendForm);
 
-function getData() {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            var data = JSON.parse(xhr.responseText);
-            document.getElementById('client-name').innerHTML = data.name;
-            document.getElementById('client-address').innerHTML = data.address;
-        }
+function sendForm(e) {
+    var form = document.querySelector("form");
+    if (form.checkValidity()) {
+        e.preventDefault();
+        $.ajax({
+            url: "https://formspree.io/tanjuscha2602@mail.ru",
+            method: "POST",
+            data: {
+                clientName: $("#text").val(),
+                clientEmail: $("#email").val(),
+                comment: $("#message").val()
+            },
+            dataType: "json"
+        });
     }
-    xhr.open('GET', 'client-data.json', true);
-    xhr.send();
 }
+
